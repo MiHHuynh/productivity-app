@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_modus import Modus
 from flask_login import LoginManager
@@ -31,4 +31,4 @@ app.register_blueprint(users_blueprint, url_prefix='/users')
 
 @app.route('/')
 def root():
-	return "HELLO!"
+	return redirect(url_for('users.signup'))
