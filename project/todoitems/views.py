@@ -34,11 +34,33 @@ def show(user_id, list_id, item_id):
 	user = User.query.get(user_id)
 	found_list = List.query.get(list_id)
 	todoitem = ToDoItem.query.get(item_id)
-	pass
+	if request.method == b'PATCH':
+		form = ToDoItemForm(request.form)
+		if form.validate():
+			todoitem.description = form.data['description']
+			todoitem.due_date = form.data['due_date']
+			db.session.add(todoitem)
+			db.session.commit()
+			flash("You have successfully edited your to-do item!")
+			return redirect(url_for('todoitems.show', user_id=user.id, list_id=found_list.id, item_id=todoitem.id))
+		flash("Something went wrong in editing your to-do item. Please try again.")
+		return redirect('todoitems.edit', user_id=user.id, list_id=found_list.id, item_id=todoitem.id)
+	if request.method == b'DELETE':
+		delete_form = DeleteForm(request.form)
+		if delete_form.validate():
+			db.session.delete(todoitem)
+			db.session.commit()
+			flash("You have successfully deleted your item!")
+			return redirect('todoitems.index', user_id=user.id, list_id=found_list.id)
+		flash("Something went wrong in deleting your to-do item. Please try again.")
+		return redirect(url_for('todoitems.edit', user_id=user.id, list_id=found_list.id, item_id=todoitem.id))
+	return render_template('todoitems/show.html', user=user, found_list=found_list, item=todoitem)
 
 @todoitems_blueprint.route('/<int:item_id>/edit')
 def edit(user_id, list_id, item_id):
 	user = User.query.get(user_id)
 	found_list = List.query.get(list_id)
 	todoitem = ToDoItem.query.get(item_id)
-	pass
+	form = ToDoItemForm(obj=todoitem)
+	delete_form = DeleteForm()
+	return render_template('todoitems/edit.html', user=user, found_list=found_list, todoitem=todoitem, form=form, delete_form=delete_form)

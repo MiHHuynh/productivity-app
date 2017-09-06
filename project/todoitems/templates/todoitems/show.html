@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{{ found_list.name }}
+<br>
+<br>ID: {{ item.id }}
+<br>{{ item.description }}
+<br>Due: {{item.due_date}}
+<br><a href="{{url_for('todoitems.edit', user_id=user.id, list_id=found_list.id, item_id=item.id)}}">Edit</a>
+
+<br>
+<a href="{{ url_for('todoitems.index', user_id=user.id, list_id=found_list.id) }}">Go back to all items in {{ found_list.name }}</a>
+{% endblock %}

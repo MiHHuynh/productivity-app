@@ -3,12 +3,11 @@
 
 {{ found_list.name }}
 
-<ul>
-	<li>SAMPLE LIST ITEM</li>
-	<li>SAMPLE LIST ITEM</li>
-	<li>SAMPLE LIST ITEM</li>
-	<li>SAMPLE LIST ITEM</li>
-</ul>
+<ol>
+{% for item in found_list.todo_items %}
+	<li>{{ item.description }} || Due: {{item.due_date}}</li>
+{% endfor %}
+</ol>
 
 <a href="{{ url_for('lists.edit', user_id=user.id, list_id=found_list.id) }}">Edit this list</a>
 <br>

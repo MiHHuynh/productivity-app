@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form action="{{ url_for('todoitems.show', user_id=user.id, list_id=found_list.id, item_id=todoitem.id) }}?_method=PATCH" method="POST">
+	{{ form.csrf_token }}
+	<p>
+		{{ form.description(placeholder="Description")}}
+		<span>
+			{% if form.description.errors %}
+				{% for error in form.description.errors %}
+					{{ error }}
+				{% endfor %}
+			{% endif %}
+		</span>
+	</p>
+	<p>
+		{{ form.due_date(placeholder="mm/dd/yyyy") }}
+		<span>
+			{% if form.due_date.errors %}
+				{% for error in form.due_date.errors %}
+					{{ error }}
+				{% endfor %}
+			{% endif %}
+		</span>
+	</p>
+	<button type="submit">Edit this item!</button>
+</form>
+
+<form action="{{ url_for('todoitems.show', user_id=user.id, list_id=found_list.id, item_id=todoitem.id) }}?_method=DELETE" method="POST">
+	{{ delete_form.csrf_token }}
+	<button type="submit">Delete this item!</button>
+</form>
+
+{% endblock %}

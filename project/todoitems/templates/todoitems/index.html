@@ -6,9 +6,11 @@
 
 <ol>
 {% for item in found_list.todo_items %}
-	<li>{{ item.description }} || Due: {{item.due_date}}</li>
+	<li>ID: {{ item.id }} || {{ item.description }} || Due: {{item.due_date}} || <a href="{{url_for('todoitems.edit', user_id=user.id, list_id=found_list.id, item_id=item.id)}}">Edit</a> || <a href="{{url_for('todoitems.show', user_id=user.id, list_id=found_list.id, item_id=item.id)}}">Show</a></li>
 {% endfor %}
 </ol>
 
-<br><a href="{{ url_for('todoitems.new', user_id=user.id, list_id=found_list.id) }}">Add list items!</a>
+<a href="{{ url_for('todoitems.new', user_id=user.id, list_id=found_list.id) }}">Add list items!</a>
+<br>
+<a href="{{ url_for('lists.index', user_id=user.id) }}">Go back to all lists</a>
 {% endblock %}
