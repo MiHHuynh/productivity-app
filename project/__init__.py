@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for
+from flask import Flask, redirect, url_for, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_modus import Modus
 from flask_login import LoginManager
@@ -32,4 +32,4 @@ app.register_blueprint(users_blueprint, url_prefix='/users')
 
 @app.route('/')
 def root():
-	return redirect(url_for('users.signup'))
+	return render_template('landingpage.html')

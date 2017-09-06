@@ -1,0 +1,36 @@
+.mainsplash {
+	height: 700px;
+	background-image: url("../assets/workspace.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.buckets {
+	height: 500px;
+	background-color: #fff;
+	display: flex;
+	justify-content: center;
+}
+
+.bucket {
+	margin: 2em 2em;
+}
+
+.secondsplash {
+	height: 700px;
+	background-image: url("../assets/tablehands.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.topnav {
+	margin: 0;
+	height: 5em;
+	width: 100%;
+	position: fixed;
+	background-color: #fff;
+}

@@ -2,11 +2,17 @@
 
 {% block content %}
 
-{{ found_list.name }}
 
+<ol class="breadcrumb">
+  <li><a href="{{ url_for('lists.index', user_id=user.id) }}">Home</a></li>
+  <li><a href="{{ url_for('lists.index', user_id=user.id) }}">All Lists</a></li>
+  <li class="active">{{ found_list.name }}</li>
+</ol>
+
+<h3>{{ found_list.name }}</h3>
 <ol>
 {% for item in found_list.todo_items %}
-	<li>ID: {{ item.id }} || {{ item.description }} || Due: {{item.due_date}} || <a href="{{url_for('todoitems.edit', user_id=user.id, list_id=found_list.id, item_id=item.id)}}">Edit</a> || <a href="{{url_for('todoitems.show', user_id=user.id, list_id=found_list.id, item_id=item.id)}}">Show</a></li>
+	<li>ID: {{ item.id }} || {{ item.description }} || Due: {{item.due_date}} || <a href="{{url_for('todoitems.edit', user_id=user.id, list_id=found_list.id, item_id=item.id)}}">Edit</a> || <a href="{{url_for('todoitems.show', user_id=user.id, list_id=found_list.id, item_id=item.id)}}">Show</a> || <a class="btn btn-danger">Work On This <i class="glyphicon glyphicon-dashboard"></i></a></li>
 {% endfor %}
 </ol>
 

@@ -2,7 +2,13 @@
 
 {% block content %}
 
-{{ found_list.name }}
+<ol class="breadcrumb">
+  <li><a href="{{ url_for('lists.index', user_id=user.id) }}">Home</a></li>
+  <li><a href="{{ url_for('lists.show', user_id=user.id, list_id=found_list.id)}}">{{ found_list.name}}</a></li>
+  <li class="active">{{ item.description }}</li>
+</ol>
+
+<h3>{{ found_list.name }}</h3>
 <br>
 <br>ID: {{ item.id }}
 <br>{{ item.description }}

@@ -3,17 +3,20 @@
 
 <form action="{{ url_for('lists.index', user_id=user.id) }}" method="POST">
 	{{ form.csrf_token }}
-	<p>
-		{{ form.name(placeholder="Name of List")}}
-		<span>
-			{% if form.name.errors %}
-				{% for error in form.name.errors %}
-					{{ error }}
-				{% endfor %}
-			{% endif %}
-		</span>
-	</p>
-	<button type="submit">Add another list!</button>
+	<div class="form-group">
+		{{ form.name.label }}
+		{{ form.name(placeholder="Name of List", class_="form-control")}}
+		<p>
+			<span>
+				{% if form.name.errors %}
+					{% for error in form.name.errors %}
+						{{ error }}
+					{% endfor %}
+				{% endif %}
+			</span>
+		</p>
+	</div>
+	<button type="submit" class="btn btn-primary">Add list!</button>
 </form>
 
 {% endblock %}

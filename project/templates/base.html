@@ -3,17 +3,37 @@
 <head>
 	<meta charset="UTF-8">
 	<title>PRODUCTIVITY APP</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-	{% with messages = get_flashed_messages() %}
-	  {% if messages %}
-	    {% for message in messages %}
-	      <p>{{ message }}</p>
-	    {% endfor %}
-	  {% endif %}
-	{% endwith %}
+	<div class="wrapper">
+		<nav id="sidebar">
+			<div class="sidebar-header">
+				<h3>Menu Options</h3>
+			</div>
+			<ul class="list-unstyled components">
+				<li class="active"><a href="#">Home</a></li>
+				<li><a href="#">Lists</a></li>
+				<li><a href="#">Blacklisted Sites</a></li>
+				<li><a href="#">Account Settings</a></li>
+				<li><a href="#">Log Out</a></li>
+			</ul>
+		</nav>
+		<div id="content">
+			{% with messages = get_flashed_messages() %}
+			  {% if messages %}
+			    {% for message in messages %}
+			    <div class="alert alert-info">
+					{{ message }}
+				</div>
+			    {% endfor %}
+			  {% endif %}
+			{% endwith %}
 
-	{% block content %}
-	{% endblock %}
+			{% block content %}
+			{% endblock %}
+		</div>
+	</div>
 </body>
 </html>

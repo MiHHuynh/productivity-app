@@ -1,0 +1,33 @@
+.wrapper {
+	align-items: stretch;
+	display: flex;
+}
+
+.navbar {
+	background-color: #97dffc;
+	opacity: 70%;
+	color: #fff;
+}
+
+#sidebar {
+	min-width: 250px;
+	max-width: 250px;
+	min-height: 100vh;
+	background-color: #97dffc;
+	padding-left: 2em;
+}
+
+.list-unstyled > li {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#sidebar.active {
+	margin-left: -250px;
+
+}
+
+#content {
+	padding-top: 3em;
+	padding-left: 3em;
+}
