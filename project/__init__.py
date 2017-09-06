@@ -26,8 +26,8 @@ from project.users.views import users_blueprint
 import project.models
 
 app.register_blueprint(blacklistedsites_blueprint, url_prefix='/blacklistedsites')
-app.register_blueprint(lists_blueprint, url_prefix='/lists')
-app.register_blueprint(todoitems_blueprint, url_prefix="/todoitems")
+app.register_blueprint(lists_blueprint, url_prefix='/users/<int:user_id>/lists')
+app.register_blueprint(todoitems_blueprint, url_prefix="/users/<int:user_id>/lists/<int:list_id>/todoitems")
 app.register_blueprint(users_blueprint, url_prefix='/users')
 
 @app.route('/')

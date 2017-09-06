@@ -1,7 +1,6 @@
 from flask import redirect, render_template, request, url_for, Blueprint, flash
-# from project.users.forms import UserForm
 from project.models import User
-from project.users.forms import UserForm, DeleteUserForm
+from project.users.forms import UserForm, DeleteForm
 from project import db, bcrypt
 from sqlalchemy.exc import IntegrityError
 
@@ -52,20 +51,20 @@ def welcome():
 @users_blueprint.route('/<int:user_id>', methods=['GET', 'PATCH', 'DELETE'])
 def show(user_id):
 	user = User.query.get(user_id)
+	delete_form = DeleteForm(request.form)
+	form = UserForm(request.form)
 	if request.method == b'PATCH':
-		form = UserForm(request.form)
 		if form.validate():
 			user.email = form.data['email']
-			user.password = form.data['password']
+			user.password = bcrypt.generate_password_hash(form.data['password']).decode('UTF-8')
 			db.session.add(user)
 			db.session.commit()
 			flash("You have successfully changed your account details!")
 			return redirect(url_for('users.show', user_id=user.id))
 		else:
 			flash("Something went wrong in editing your account details. Please try again.")
-			return render_template('users/edit.html', form=form)
+			return render_template('users/edit.html', user=user, form=form, delete_form=delete_form)
 	if request.method == b'DELETE':
-		delete_form = DeleteUserForm(request.form)
 		if delete_form.validate():
 			db.session.delete(user)
 			db.session.commit()
@@ -80,5 +79,5 @@ def show(user_id):
 def edit(user_id):
 	user = User.query.get(user_id)
 	form = UserForm(obj=user)
-	delete_form = DeleteUserForm()
+	delete_form = DeleteForm()
 	return render_template('users/edit.html', user=user, form=form, delete_form=delete_form)

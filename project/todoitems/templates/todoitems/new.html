@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form action="{{ url_for('todoitems.index', user_id=user.id, list_id=found_list.id) }}" method="POST">
+	{{ form.csrf_token }}
+	<p>
+		{{ form.description(placeholder="Description")}}
+		<span>
+			{% if form.description.errors %}
+				{% for error in form.description.errors %}
+					{{ error }}
+				{% endfor %}
+			{% endif %}
+		</span>
+	</p>
+	<p>
+		{{ form.due_date(placeholder="mm/dd/yyyy") }}
+		<span>
+			{% if form.due_date.errors %}
+				{% for error in form.due_date.errors %}
+					{{ error }}
+				{% endfor %}
+			{% endif %}
+		</span>
+	</p>
+	<button type="submit">Add a list item!</button>
+</form>
+
+{% endblock %}

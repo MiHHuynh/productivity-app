@@ -7,5 +7,5 @@ class UserForm(FlaskForm):
 	email = StringField('email', validators=[DataRequired(), Email()])
 	password = StringField('password', validators=[DataRequired()])
 
-class DeleteUserForm(FlaskForm):
+class DeleteForm(FlaskForm):
 	pass

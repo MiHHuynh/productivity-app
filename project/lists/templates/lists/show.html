@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{{ found_list.name }}
+
+<ul>
+	<li>SAMPLE LIST ITEM</li>
+	<li>SAMPLE LIST ITEM</li>
+	<li>SAMPLE LIST ITEM</li>
+	<li>SAMPLE LIST ITEM</li>
+</ul>
+
+<a href="{{ url_for('lists.edit', user_id=user.id, list_id=found_list.id) }}">Edit this list</a>
+<br>
+<a href="{{ url_for('lists.index', user_id=user.id) }}">Go back to all lists</a>
+
+{% endblock %}
