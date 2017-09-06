@@ -1,8 +1,30 @@
-{% extends 'base.html %}
+{% extends 'base.html' %}
 
 {% block content %}
-HELLO HERE IS THE SIGNUP FORM FOR USERS
-<br><br>
-THERE IS GOING TO BE A LINK THAT SAYS "ALREADY SIGNED UP? CLICK HERE TO LOG IN" WHICH LEADS TO THE LOG IN PAGE INSTEAD
+
+<form action="{{ url_for('users.signup') }}" method="POST">
+	{{ form.csrf_token }}
+	<p>
+		{{ form.email(placeholder="E-Mail")}}
+		<span>
+			{% if form.email.errors %}
+				{% for error in form.email.errors %}
+					{{ error }}
+				{% endfor %}
+			{% endif %}
+		</span>
+	</p>
+	<p>
+		{{ form.password(placeholder="Password") }}
+		<span>
+			{% if form.password.errors %}
+				{% for error in form.password.errors %}
+					{{ error }}
+				{% endfor %}
+			{% endif %}
+		</span>
+	</p>
+	<button type="submit">Sign up!</button>
+</form>
 
 {% endblock %}

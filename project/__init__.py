@@ -9,6 +9,7 @@ import os
 app = Flask(__name__)
 modus = Modus(app)
 csrf = CSRFProtect(app)
+bcrypt = Bcrypt(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/productivity-db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

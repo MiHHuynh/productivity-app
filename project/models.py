@@ -1,4 +1,4 @@
-from project import db
+from project import db, bcrypt
 
 blacklisted_site_user_join_table = db.Table('blacklisted_site_users',
 		db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
@@ -16,7 +16,7 @@ class User(db.Model):
 
 	def __init__(self, email, password):
 		self.email = email
-		self.password = password
+		self.password = bcrypt.generate_password_hash(password).decode('UTF-8')
 
 	# def calc_punctuality_percentage(self):
 	# 	pass

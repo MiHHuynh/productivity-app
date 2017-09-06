@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form action="{{ url_for('users.show', user_id=user.id) }}?_method=PATCH" method="POST">
+	{{ form.csrf_token }}
+	<p>
+		{{ form.email(placeholder="{{ user.email }}")}}
+		<span>
+			{% if form.email.errors %}
+				{% for error in form.email.errors %}
+					{{ error }}
+				{% endfor %}
+			{% endif %}
+		</span>
+	</p>
+	<p>
+		{{ form.password(placeholder="") }}
+		<span>
+			{% if form.password.errors %}
+				{% for error in form.password.errors %}
+					{{ error }}
+				{% endfor %}
+			{% endif %}
+		</span>
+	</p>
+	<button type="submit">Edit account details!</button>
+</form>
+
+<form action="{{ url_for('users.show', user_id=user.id) }}?_method=DELETE" method="POST">
+	{{ delete_form.hidden_tag() }}
+	<button type="submit">DELETE YOUR ACCOUNT</button>
+</form>
+
+{% endblock %}
