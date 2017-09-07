@@ -3,6 +3,9 @@ from project.models import User
 from project.users.forms import UserForm, DeleteForm
 from project import db, bcrypt
 from sqlalchemy.exc import IntegrityError
+from functools import wraps
+from project.decorators import ensure_correct_user
+from flask_login import login_user, logout_user, current_user, login_required
 
 users_blueprint = Blueprint('users', __name__, template_folder='templates')
 
@@ -20,7 +23,9 @@ def signup():
 				new_user = User(form.data['email'], form.data['password'])
 				db.session.add(new_user)
 				db.session.commit()
+				login_user(new_user)
 			except IntegrityError as e:
+				flash("That e-mail address is already taken.")
 				return render_template('signup.html', form=form)
 			flash("You have successfully created an account!")
 			return redirect(url_for('users.welcome'))
@@ -30,11 +35,12 @@ def signup():
 def login():
 	form = UserForm(request.form)
 	if request.method == 'POST':
-		if form.validate():
-			found_user = User.query.filter_by(email=form.data['email'].first())
+		if form.validate_on_submit():
+			found_user = User.query.filter_by(email=form.data['email']).first()
 			if found_user:
-				authenticated_user = bcrypt.check_password_has(found_user.password, form.data['password'])
+				authenticated_user = bcrypt.check_password_hash(found_user.password, form.data['password'])
 				if authenticated_user:
+					login_user(found_user)
 					flash("Welcome back!")
 					return redirect(url_for('users.welcome'))
 		flash("Please log in.")
@@ -42,13 +48,16 @@ def login():
 	return render_template('users/login.html', form=form)
 
 @users_blueprint.route('/welcome')
+@login_required
 def welcome():
-	return render_template('users/welcome.html')
+	return redirect(url_for('lists.index', user_id=current_user.id))
 	# return redirect(url_for('lists.index'))
 	# render DASHBOARD
 	# dashboard would be...
 
 @users_blueprint.route('/<int:user_id>', methods=['GET', 'PATCH', 'DELETE'])
+@login_required
+@ensure_correct_user
 def show(user_id):
 	user = User.query.get(user_id)
 	delete_form = DeleteForm(request.form)
@@ -69,6 +78,7 @@ def show(user_id):
 			db.session.delete(user)
 			db.session.commit()
 			flash("You have successfully deleted your account.")
+			logout_user()
 			return redirect(url_for('users.index'))
 		else:
 			flash("Something went wrong in deleting your account. Please try again.")
@@ -76,8 +86,17 @@ def show(user_id):
 	return render_template('users/show.html', user=user)
 
 @users_blueprint.route('/<int:user_id>/edit')
+@login_required
+@ensure_correct_user
 def edit(user_id):
 	user = User.query.get(user_id)
 	form = UserForm(obj=user)
 	delete_form = DeleteForm()
 	return render_template('users/edit.html', user=user, form=form, delete_form=delete_form)
+
+@users_blueprint.route('/logout')
+@login_required
+def logout():
+    flash("Logged out!")
+    logout_user()
+    return redirect(url_for('users.login'))

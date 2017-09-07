@@ -4,23 +4,47 @@
 	<meta charset="UTF-8">
 	<title>PRODUCTIVITY APP</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Cinzel+Decorative" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
-	<nav class="navbar navbar-inverse">
-	  <div class="container-fluid">
-	    <div class="navbar-header">
-	      <a class="navbar-brand" href="#">Productivity App</a>
-	    </div>
-	    <ul class="nav navbar-nav navbar-right">
-	      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-	      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-	    </ul>
-	  </div>
-	</nav>
-	<div id="content">
-		{% block content %}
-		{% endblock %}
+<body class="signup-login">
+	<div class="topnav">
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	      <div class="container-fluid">
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <div class="projectName navbar-brand">
+	            <a href="{{url_for('root')}}"><span class="glyphicon glyphicon-fire"></span> Productivity Helper</a>
+	          </div>
+	        </div> <!-- end navbar-header -->
+	        <div class="navbar-collapse collapse">
+	          <ul class="nav navbar-nav navbar-right">
+	            <li class=""><a href="{{url_for('users.login')}}">Login</a></li>
+	            <li class=""><a href="{{url_for('users.signup')}}">Sign Up</a></li>
+	          </ul>          
+	        </div>
+	      </div>
+	    </nav>
+	</div>
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+	    {% for message in messages %}
+	    <div class="alert alert-info">
+			{{ message }}
+		</div>
+	    {% endfor %}
+	  {% endif %}
+	{% endwith %}
+	<div class="signup-login-container">
+		<div id="signup-login-content">
+			{% block content %}
+			{% endblock %}
+		</div>
 	</div>
 </body>
 </html>

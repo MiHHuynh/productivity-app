@@ -1,0 +1,34 @@
+{% extends 'signuploginbase.html' %}
+
+{% block content %}
+
+<h3 class="signup-header">Welcome back!</h3>
+
+<form action="{{ url_for('users.login') }}" method="POST">
+	{{ form.csrf_token }}
+	<p>
+		{{ form.email(placeholder="E-Mail", class_="form-control")}}
+		<span>
+			{% if form.email.errors %}
+				{% for error in form.email.errors %}
+					{{ error }}
+				{% endfor %}
+			{% endif %}
+		</span>
+	</p>
+	<p>
+		{{ form.password(placeholder="Password", class_="form-control") }}
+		<span>
+			{% if form.password.errors %}
+				{% for error in form.password.errors %}
+					{{ error }}
+				{% endfor %}
+			{% endif %}
+		</span>
+	</p>
+	<button type="submit" class="btn">Login!</button>
+</form>
+<br>
+<p>Don't have an acount? <a href="{{url_for('users.signup')}}" class="login-link">Sign up today.</a></p>
+
+{% endblock %}

@@ -2,10 +2,12 @@
 
 {% block content %}
 
+<h3 class="signup-header">Sign up for a free account today!</h3>
+
 <form action="{{ url_for('users.signup') }}" method="POST">
 	{{ form.csrf_token }}
 	<p>
-		{{ form.email(placeholder="E-Mail")}}
+		{{ form.email(placeholder="E-Mail", class_="form-control")}}
 		<span>
 			{% if form.email.errors %}
 				{% for error in form.email.errors %}
@@ -15,7 +17,7 @@
 		</span>
 	</p>
 	<p>
-		{{ form.password(placeholder="Password") }}
+		{{ form.password(placeholder="Password", class_="form-control") }}
 		<span>
 			{% if form.password.errors %}
 				{% for error in form.password.errors %}
@@ -24,7 +26,9 @@
 			{% endif %}
 		</span>
 	</p>
-	<button type="submit">Sign up!</button>
+	<button type="submit" class="btn">Sign up!</button>
 </form>
+<br>
+<p>Already have an account? <a href="{{url_for('users.login')}}" class="login-link">Log in here.</a></p>
 
 {% endblock %}

@@ -21,7 +21,7 @@
 	            <span class="icon-bar"></span>
 	          </button>
 	          <div class="projectName navbar-brand">
-	            <a href="#"><span class="glyphicon glyphicon-fire"></span> Productivity Helper</a>
+	            <a href="{{url_for('root')}}"><span class="glyphicon glyphicon-fire"></span> Productivity Helper</a>
 	          </div>
 	        </div> <!-- end navbar-header -->
 	        <div class="navbar-collapse collapse">
@@ -38,7 +38,7 @@
 		<div class="mainsplash">
 			<h1 class="splash-headline">Technology has largely taken away our ability to focus.</h1>
 			<h2 class="splash-headline">Let's use more technology to take it back!</h2>
-			<button class="btn signup-button">Sign Up Now!</button>
+			<a class="btn signup-button" href="{{url_for('users.signup')}}">Sign Up Now!</a>
 		</div>
 		<div class="buckets" id="about">
 			<div class="row">

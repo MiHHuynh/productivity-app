@@ -3,10 +3,15 @@ from project.models import User, List
 from project.lists.forms import ListForm, DeleteForm
 from project import db, bcrypt
 from sqlalchemy.exc import IntegrityError
+from functools import wraps
+from project.decorators import ensure_correct_user
+from flask_login import login_user, logout_user, current_user, login_required
 
 lists_blueprint = Blueprint('lists', __name__, template_folder='templates')
 
 @lists_blueprint.route('/', methods=['GET', 'POST'])
+# @login_required
+# @ensure_correct_user
 def index(user_id):
 	user = User.query.get(user_id)
 	form = ListForm(request.form)
@@ -22,12 +27,16 @@ def index(user_id):
 	return render_template('lists/index.html', user=user)
 
 @lists_blueprint.route('/new')
+# @login_required
+# @ensure_correct_user
 def new(user_id):
 	form = ListForm(request.form)
 	user = User.query.get(user_id)
 	return render_template('lists/new.html', user=user, form=form)
 
 @lists_blueprint.route('/<int:list_id>', methods=['GET', 'PATCH', 'DELETE'])
+# @login_required
+# @ensure_correct_user
 def show(user_id, list_id):
 	user = User.query.get(user_id)
 	found_list = List.query.get(list_id)
@@ -55,6 +64,8 @@ def show(user_id, list_id):
 	return render_template('lists/show.html', user=user, found_list=found_list)
 
 @lists_blueprint.route('/<int:list_id>/edit')
+# @login_required
+# @ensure_correct_user
 def edit(user_id, list_id):
 	user = User.query.get(user_id)
 	found_list = List.query.get(list_id)

@@ -1,11 +1,12 @@
 from project import db, bcrypt
+from flask_login import UserMixin
 
 blacklisted_site_user_join_table = db.Table('blacklisted_site_users',
 		db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
 		db.Column('blacklisted_site_id', db.Integer, db.ForeignKey('blacklisted_sites.id'))
 	)
 
-class User(db.Model):
+class User(db.Model, UserMixin):
 	__tablename__ = 'users'
 
 	id = db.Column(db.Integer, primary_key=True)
