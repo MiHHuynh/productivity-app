@@ -4,8 +4,8 @@ from wtforms.validators import DataRequired, Email
 from project.models import User
 
 class UserForm(FlaskForm):
-	email = StringField('email', validators=[DataRequired(), Email()])
-	password = StringField('password', validators=[DataRequired()])
+	email = StringField('E-mail', validators=[DataRequired(), Email()])
+	password = PasswordField('Password', validators=[DataRequired()])
 
 class DeleteForm(FlaskForm):
 	pass

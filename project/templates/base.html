@@ -18,8 +18,8 @@
 				<li class="active sidebar-link"><a href="#">Home</a></li>
 				<li class="sidebar-link"><a href="#">Lists</a></li>
 				<li class="sidebar-link"><a href="#">Blacklisted Sites</a></li>
-				<li class="sidebar-link"><a href="#">Account Settings</a></li>
-				<li class="sidebar-link"><a href="{{users.logout}}">Log Out</a></li>
+				<li class="sidebar-link"><a href="{{url_for('users.edit', id=current_user.id)}}">Account Settings</a></li>
+				<li class="sidebar-link"><a href="{{url_for('users.logout')}}">Log Out</a></li>
 			</ul>
 		</nav>
 		<div id="content">

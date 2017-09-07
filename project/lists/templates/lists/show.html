@@ -9,7 +9,7 @@
 {% endfor %}
 </ol>
 
-<a href="{{ url_for('lists.edit', user_id=user.id, list_id=found_list.id) }}">Edit this list</a>
+<a href="{{ url_for('lists.edit', user_id=user.id, id=found_list.id) }}">Edit this list</a>
 <br>
 <a href="{{ url_for('lists.index', user_id=user.id) }}">Go back to all lists</a>
 

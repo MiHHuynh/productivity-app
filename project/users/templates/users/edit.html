@@ -2,34 +2,45 @@
 
 {% block content %}
 
-<form action="{{ url_for('users.show', user_id=user.id) }}?_method=PATCH" method="POST">
-	{{ form.csrf_token }}
-	<p>
-		{{ form.email(placeholder="{{ user.email }}")}}
-		<span>
-			{% if form.email.errors %}
-				{% for error in form.email.errors %}
-					{{ error }}
-				{% endfor %}
-			{% endif %}
-		</span>
-	</p>
-	<p>
-		{{ form.password }}
-		<span>
-			{% if form.password.errors %}
-				{% for error in form.password.errors %}
-					{{ error }}
-				{% endfor %}
-			{% endif %}
-		</span>
-	</p>
-	<button type="submit">Edit account details!</button>
-</form>
+<h3>Edit your account details:</h3><br>
 
-<form action="{{ url_for('users.show', user_id=user.id) }}?_method=DELETE" method="POST">
+<form action="{{ url_for('users.show', id=user.id) }}?_method=PATCH" method="POST">
+	{{ form.csrf_token }}
+	<div class="form-group">
+		{{ form.email.label }}
+		{{ form.email(placeholder="{{ user.email }}", class_="form-control")}}
+		<p>
+			<span>
+				{% if form.email.errors %}
+					{% for error in form.email.errors %}
+						{{ error }}
+					{% endfor %}
+				{% endif %}
+			</span>
+		</p>
+	</div>
+	<div class="form-group">
+		{{ form.password.label }}
+		{{ form.password(class_="form-control") }}
+		<p>
+			<span>
+				{% if form.password.errors %}
+					{% for error in form.password.errors %}
+						{{ error }}
+					{% endfor %}
+				{% endif %}
+			</span>
+		</p>
+	</div>
+	<button type="submit" class="btn btn-primary">Save</button>
+</form>
+<br><br>
+<p>Warning: Clicking the button below</p>
+<p>will remove ALL your information.</p>
+<p>This CANNOT be undone!</p>
+<form action="{{ url_for('users.show', id=user.id) }}?_method=DELETE" method="POST">
 	{{ delete_form.hidden_tag() }}
-	<button type="submit">DELETE YOUR ACCOUNT</button>
+	<button type="submit" class="btn">DELETE YOUR ACCOUNT</button>
 </form>
 
 {% endblock %}

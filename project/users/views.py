@@ -55,11 +55,11 @@ def welcome():
 	# render DASHBOARD
 	# dashboard would be...
 
-@users_blueprint.route('/<int:user_id>', methods=['GET', 'PATCH', 'DELETE'])
+@users_blueprint.route('/<int:id>', methods=['GET', 'PATCH', 'DELETE'])
 @login_required
 @ensure_correct_user
-def show(user_id):
-	user = User.query.get(user_id)
+def show(id):
+	user = User.query.get(id)
 	delete_form = DeleteForm(request.form)
 	form = UserForm(request.form)
 	if request.method == b'PATCH':
@@ -69,7 +69,7 @@ def show(user_id):
 			db.session.add(user)
 			db.session.commit()
 			flash("You have successfully changed your account details!")
-			return redirect(url_for('users.show', user_id=user.id))
+			return redirect(url_for('lists.index', user_id=user.id))
 		else:
 			flash("Something went wrong in editing your account details. Please try again.")
 			return render_template('users/edit.html', user=user, form=form, delete_form=delete_form)
@@ -82,14 +82,14 @@ def show(user_id):
 			return redirect(url_for('users.index'))
 		else:
 			flash("Something went wrong in deleting your account. Please try again.")
-			return redirect(url_for('users.edit', user_id=user.id))
+			return redirect(url_for('users.edit', id=user.id))
 	return render_template('users/show.html', user=user)
 
-@users_blueprint.route('/<int:user_id>/edit')
+@users_blueprint.route('/<int:id>/edit')
 @login_required
 @ensure_correct_user
-def edit(user_id):
-	user = User.query.get(user_id)
+def edit(id):
+	user = User.query.get(id)
 	form = UserForm(obj=user)
 	delete_form = DeleteForm()
 	return render_template('users/edit.html', user=user, form=form, delete_form=delete_form)

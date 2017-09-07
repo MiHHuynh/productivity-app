@@ -34,12 +34,12 @@ def new(user_id):
 	user = User.query.get(user_id)
 	return render_template('lists/new.html', user=user, form=form)
 
-@lists_blueprint.route('/<int:list_id>', methods=['GET', 'PATCH', 'DELETE'])
+@lists_blueprint.route('/<int:id>', methods=['GET', 'PATCH', 'DELETE'])
 # @login_required
 # @ensure_correct_user
-def show(user_id, list_id):
+def show(user_id, id):
 	user = User.query.get(user_id)
-	found_list = List.query.get(list_id)
+	found_list = List.query.get(id)
 	if request.method == b'PATCH':
 		form = ListForm(request.form)
 		if form.validate():
@@ -47,10 +47,10 @@ def show(user_id, list_id):
 			db.session.add(found_list)
 			db.session.commit()
 			flash("You have successfully edited your list!")
-			return redirect(url_for('lists.show', user_id=user.id, list_id=found_list.id))
+			return redirect(url_for('lists.show', user_id=user.id, id=found_list.id))
 		else:
 			flash("Something went wrong in editing your list. Please try again.")
-			return redirect(url_for('lists.edit', user_id=user.id, list_id=found_list.id))
+			return redirect(url_for('lists.edit', user_id=user.id, id=found_list.id))
 	if request.method == b'DELETE':
 		delete_form = DeleteForm(request.form)
 		if delete_form.validate():
@@ -60,15 +60,15 @@ def show(user_id, list_id):
 			return redirect(url_for('lists.index', user_id=user.id))
 		else:
 			flash("Something went wrong in deleting your list. Pleast try again.")
-			return redirect(url_for('lists.edit', user_id=user.id, list_id=found_list.id))
+			return redirect(url_for('lists.edit', user_id=user.id, id=found_list.id))
 	return render_template('lists/show.html', user=user, found_list=found_list)
 
-@lists_blueprint.route('/<int:list_id>/edit')
+@lists_blueprint.route('/<int:id>/edit')
 # @login_required
 # @ensure_correct_user
-def edit(user_id, list_id):
+def edit(user_id, id):
 	user = User.query.get(user_id)
-	found_list = List.query.get(list_id)
+	found_list = List.query.get(id)
 	form = ListForm(obj=found_list)
 	delete_form = DeleteForm(obj=found_list)
 	return render_template('lists/edit.html', user=user, found_list=found_list, form=form, delete_form=delete_form)

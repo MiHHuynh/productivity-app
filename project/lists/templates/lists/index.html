@@ -6,12 +6,12 @@
 
 <ul>
 {% for list in user.lists %}
-	<li>{{ list.name }} || <a href="{{ url_for('lists.show', user_id=user.id, list_id=list.id) }}">View</a> || <a href="{{ url_for('lists.edit', user_id=user.id, list_id=list.id) }}">Edit</a></li>
+	<li>{{ list.name }} || <a href="{{ url_for('lists.show', user_id=user.id, id=list.id) }}">View</a> || <a href="{{ url_for('lists.edit', user_id=user.id, id=list.id) }}">Edit</a></li>
 {% endfor %}
 </ul>
 
 <a href="{{ url_for('lists.new', user_id=user.id) }}">Add another list</a>
 <br>
-<a href="{{ url_for('users.show', user_id=user.id) }}">Go back to user information</a>
+<a href="{{ url_for('users.show', id=user.id) }}">Go back to user information</a>
 
 {% endblock %}
