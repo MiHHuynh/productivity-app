@@ -18,10 +18,6 @@ if os.environ.get('ENV') == 'production':
 else:
 	app.config.from_object('config.DevelopmentConfig')
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/productivity-db'
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-# app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-
 db = SQLAlchemy(app)
 
 from project.models import User
