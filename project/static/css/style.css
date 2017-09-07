@@ -17,12 +17,6 @@ body.signup-login {
 	display: flex;
 }
 
-/*.navbar {
-	background-color: #97dffc;
-	opacity: 70%;
-	color: #fff;
-}*/
-
 #sidebar {
 	min-width: 250px;
 	max-width: 250px;
@@ -30,6 +24,11 @@ body.signup-login {
 	background-color: #A34241;
     color: #fff;
     transition: all 0.3s;
+}
+
+
+#grad {
+
 }
 
 .list-unstyled > li {
@@ -57,7 +56,6 @@ a, a:hover, a:focus {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    /*background: #fff;*/
 }
 
 #sidebar ul.components {
@@ -101,15 +99,16 @@ a, a:hover, a:focus {
 }
 
 #signup-login-content {
-	width: 40vh;
-	height: 40%;
+	width: 500px;
+	height: 300px;
 	border: 1px solid #ffffff;
 	background-color: #EAE0D5;
 	text-align: center;
-	padding: 3em 4em 4em 4em;
+	padding: 3em 4em 3em 4em;
 }
 
 .signup-header {
+	margin-top: 0px;
 	margin-bottom: 1em;
 }
 .signup-login-container {
@@ -124,4 +123,44 @@ a, a:hover, a:focus {
 .login-link {
 	color: #B25400;
 	font-weight: bold;
+}
+
+
+/* CIRCLES ON DASHBOARD */
+
+.progress-circles {
+	text-align: center;
+	display: flex;
+	justify-content: center;
+
+}
+
+.progress-circles, .upcoming-duedates, .all-lists {
+	border: 1px solid #C1B9B0;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 1.5em;
+	margin-bottom: 1.5em;
+}
+
+.productivity-circle {
+	width: 100px;
+	height: 100px;
+	background: #A34241;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+}
+
+.punctuality-circle {
+	width: 100px;
+	height: 100px;
+	background: #A34241;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+}
+
+.add-list {
+	color: #A34241;
 }

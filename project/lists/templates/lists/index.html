@@ -2,16 +2,68 @@
 
 {% block content %}
 
-<h3>All Your Lists</h3>
+<h3>Your Dashboard</h3>
 
-<ul>
-{% for list in user.lists %}
-	<li>{{ list.name }} || <a href="{{ url_for('lists.show', user_id=user.id, id=list.id) }}">View</a> || <a href="{{ url_for('lists.edit', user_id=user.id, id=list.id) }}">Edit</a></li>
-{% endfor %}
-</ul>
-
-<a href="{{ url_for('lists.new', user_id=user.id) }}">Add another list</a>
-<br>
-<a href="{{ url_for('users.show', id=user.id) }}">Go back to user information</a>
+<h5>Your scores:</h5>
+<div class="row progress-circles">
+	<div class="col-md-6">
+		Productivity: 0%
+		<div class="productivity-circle"></div>
+	</div>
+	<div class="col-md-6">
+		Punctuality: 0%
+		<div class="punctuality-circle"></div>
+	</div>
+</div>
+<h5>Upcoming due dates:</h5>
+<div class="row upcoming-duedates">
+	<div class="col-md-12">
+		<table class="table table-hover">
+		    <thead>
+		      <tr>
+		        <th>Due Date</th>
+		        <th>Description</th>
+		        <th>List</th>
+		        <th>View</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr>
+		        <td>9/7/2017</td>
+		        <td>Scoop the cat's litter box</td>
+		        <td>Chores</td>
+		        <td>View</td>
+		      </tr>
+		      <tr>
+		        <td>9/8/2017</td>
+		        <td>Buy more cat litter</td>
+		        <td>Chores</td>
+		        <td>View</td>
+		      </tr>
+		      <tr>
+		        <td>9/9/2017</td>
+		        <td>Build Hack-Or-Snooze</td>
+		        <td>Stuff that should've been completed years ago</td>
+		        <td>View</td>
+		      </tr>
+		    </tbody>
+		  </table>
+	</div>
+</div>
+<h5>Your lists:</h5>
+<div class="row all-lists">
+	{% for list in user.lists %}
+	<div class="col-md-4">
+		<h4>{{ list.name }}</h4>
+		<p><a href="{{ url_for('lists.show', user_id=user.id, id=list.id) }}">View</a> / <a href="{{ url_for('lists.edit', user_id=user.id, id=list.id) }}">Edit</a></p>
+		<ul>
+			{% for item in list.todo_items %}
+				<li>{{ item.description }}</li>
+			{% endfor %}
+		</ul>
+	</div>
+	{% endfor %}	
+</div>
+<a href="{{ url_for('lists.new', user_id=user.id) }}" class="add-list">Add another list</a>
 
 {% endblock %}
