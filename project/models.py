@@ -1,5 +1,6 @@
 from project import db, bcrypt
 from flask_login import UserMixin
+from datetime import datetime
 
 blacklisted_site_user_join_table = db.Table('blacklisted_site_users',
 		db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
@@ -19,8 +20,8 @@ class User(db.Model, UserMixin):
 		self.email = email
 		self.password = bcrypt.generate_password_hash(password).decode('UTF-8')
 
-	# def calc_punctuality_percentage(self):
-	# 	pass
+	def calc_punctuality_percentage(self):
+		pass
 
 class List(db.Model):
 	__tablename__ = 'lists'
@@ -49,12 +50,11 @@ class ToDoItem(db.Model):
 		self.is_complete = False
 		self.list_id = list_id
 
-	# def is_overdue(self)
-	# 	pass
-
-		#todo.is_overdue()
-
-
+	def is_overdue(self):
+		if self.due_date < datetime.now(): # if the due date has passed
+			return True
+		else:
+			return False
 
 class BlacklistedSite(db.Model):
 	__tablename__ = 'blacklisted_sites'
