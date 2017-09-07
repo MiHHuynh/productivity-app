@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
 
-{{ found_list.name }}
+<ol class="breadcrumb">
+  <li><a href="{{ url_for('lists.index', user_id=user.id) }}">Home</a></li>
+  <li><a href="{{ url_for('lists.index', user_id=user.id) }}">All Lists</a></li>
+  <li class="active">{{ found_list.name }}</li>
+</ol>
+
+<h3>{{ found_list.name }}</h3>
 
 <ol>
 {% for item in found_list.todo_items %}
@@ -9,7 +15,9 @@
 {% endfor %}
 </ol>
 
-<a href="{{ url_for('lists.edit', user_id=user.id, id=found_list.id) }}">Edit this list</a>
+<a href="{{ url_for('lists.edit', user_id=user.id, id=found_list.id) }}">Edit the list name</a>
+<br>
+<a href="{{ url_for('todoitems.new', user_id=user.id, list_id=found_list.id) }}">Add more items</a>
 <br>
 <a href="{{ url_for('lists.index', user_id=user.id) }}">Go back to all lists</a>
 

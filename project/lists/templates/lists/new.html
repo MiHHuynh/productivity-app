@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<ol class="breadcrumb">
+  <li><a href="{{ url_for('lists.index', user_id=user.id) }}">Home</a></li>
+  <li><a href="{{ url_for('lists.index', user_id=user.id) }}">All Lists</a></li>
+  <li class="active">Add new list</li>
+</ol>
+
 <h3>Create a new list!</h3>
 
 <form action="{{ url_for('lists.index', user_id=user.id) }}" method="POST">
@@ -20,5 +26,20 @@
 	</div>
 	<button type="submit" class="btn btn-primary">Add list!</button>
 </form>
+
+<h4>Current lists:</h4>
+<div class="row all-lists">
+	{% for list in user.lists %}
+	<div class="col-md-4">
+		<h4>{{ list.name }}</h4>
+		<p><a href="{{ url_for('lists.show', user_id=user.id, id=list.id) }}">View</a> / <a href="{{ url_for('lists.edit', user_id=user.id, id=list.id) }}">Edit</a></p>
+		<ul>
+			{% for item in list.todo_items %}
+				<li>{{ item.description }}</li>
+			{% endfor %}
+		</ul>
+	</div>
+	{% endfor %}	
+</div>
 
 {% endblock %}

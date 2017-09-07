@@ -132,7 +132,7 @@ a, a:hover, a:focus {
 	text-align: center;
 	display: flex;
 	justify-content: center;
-
+	padding-top: 1em;
 }
 
 .progress-circles, .upcoming-duedates, .all-lists {
@@ -163,4 +163,8 @@ a, a:hover, a:focus {
 
 .add-list {
 	color: #A34241;
+}
+
+.glyphicon-alert {
+	color: red;
 }

@@ -7,12 +7,26 @@
 <h5>Your scores:</h5>
 <div class="row progress-circles">
 	<div class="col-md-6">
-		Productivity: 0%
-		<div class="productivity-circle"></div>
+		<h4>Productivity: 0%</h4>
+		<!-- <div class="productivity-circle"></div> -->
+		<div class="progress">
+		  <div class="progress-bar" role="progressbar" aria-valuenow="70"
+		  aria-valuemin="0" aria-valuemax="100" style="width:70%">
+		  	70% Productive
+		    <span class="sr-only">70% Productive</span>
+		  </div>
+		</div>
 	</div>
 	<div class="col-md-6">
-		Punctuality: 0%
-		<div class="punctuality-circle"></div>
+		<h4>Punctuality: 0%</h4>
+		<div class="progress">
+		  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70"
+		  aria-valuemin="0" aria-valuemax="100" style="width:30%">
+		  	30% Punctual
+		    <span class="sr-only">30% Punctual</span>
+		  </div>
+		</div>
+		<!-- <div class="punctuality-circle"></div> -->
 	</div>
 </div>
 <h5>Upcoming due dates:</h5>
@@ -28,12 +42,22 @@
 		      </tr>
 		    </thead>
 		    <tbody>
-		      <tr>
-		        <td>9/7/2017</td>
-		        <td>Scoop the cat's litter box</td>
-		        <td>Chores</td>
-		        <td>View</td>
-		      </tr>
+		    {% for list in user.lists %}
+		    	{% for item in list.todo_items%}
+		    		{% if item.due_date != None %}
+		    			{% if item.is_overdue() %}
+					      <tr>
+					        <td><span class="glyphicon glyphicon-alert"></span> {{ item.due_date }}</td>
+					        <!-- time.strftime("%x", time.gmtime(variable name)) -->
+					        <td>{{ item.description }}</td>
+					        <td>{{ list.name }}</td>
+					        <td>View</td>
+					      </tr>
+						{% endif %}		    		
+					{% endif %}		    		
+			    {% endfor %}
+		    {% endfor %}
+
 		      <tr>
 		        <td>9/8/2017</td>
 		        <td>Buy more cat litter</td>

@@ -4,7 +4,7 @@
 <form action="{{ url_for('lists.show', user_id=user.id, id=found_list.id) }}?_method=PATCH" method="POST">
 	{{ form.csrf_token }}
 	<p>
-		{{ form.name(placeholder="Name of List")}}
+		{{ form.name(placeholder="Name of List", class_="form-control")}}
 		<span>
 			{% if form.name.errors %}
 				{% for error in form.name.errors %}
@@ -13,12 +13,12 @@
 			{% endif %}
 		</span>
 	</p>
-	<button type="submit">Edit this list!</button>
+	<button type="submit" class="btn">Save list name</button>
 </form>
-
+<br><br>
 <form action="{{ url_for('lists.show', user_id=user.id, id=found_list.id) }}?_method=DELETE" method="POST">
 	{{ delete_form.hidden_tag() }}
-	<button type="submit">DELETE THIS LIST!</button>
+	<button type="submit" class="btn">DELETE THIS LIST!</button>
 </form>
 
 {% endblock %}

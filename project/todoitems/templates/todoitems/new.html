@@ -1,7 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<ol class="breadcrumb">
+  <li><a href="{{ url_for('lists.index', user_id=user.id) }}">Home</a></li>
+  <li><a href="{{ url_for('lists.index', user_id=user.id) }}">All Lists</a></li>
+  <li><a href="{{ url_for('lists.show', user_id=user.id, id=found_list.id) }}">{{ found_list.name }}</a></li>
+  <li class="active">New to-do item</li>
+</ol>
+
 <h3>Add items to {{ found_list.name }}</h3>
+
+<ol>
+{% for item in found_list.todo_items %}
+	<li>{{ item.description }} || Due: {{item.due_date}}</li>
+{% endfor %}
+</ol>
 
 <form action="{{ url_for('todoitems.index', user_id=user.id, list_id=found_list.id) }}" method="POST">
 	{{ form.csrf_token }}
