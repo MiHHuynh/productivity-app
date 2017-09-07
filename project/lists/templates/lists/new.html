@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<h3>Create a new list!</h3>
+
 <form action="{{ url_for('lists.index', user_id=user.id) }}" method="POST">
 	{{ form.csrf_token }}
 	<div class="form-group">

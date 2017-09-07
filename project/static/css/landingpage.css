@@ -1,4 +1,29 @@
 .mainsplash {
+	height: 650px;
+	background-image: url("../assets/tablehands.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+    padding-top: 300px;
+}
+
+.buckets {
+	height: auto;
+	background-color: #ffffff;
+	opacity: 60%;
+	padding-bottom: 4em;
+	padding-top: 3em;
+}
+
+.splash-headline {
+	font-size: 2em;
+	color: #ffffff;
+	font-family: 'Cinzel Decorative', cursive;
+}
+
+.secondsplash {
 	height: 700px;
 	background-image: url("../assets/workspace.jpg");
     background-attachment: fixed;
@@ -7,30 +32,36 @@
     background-size: cover;
 }
 
-.buckets {
-	height: 500px;
-	background-color: #fff;
-	display: flex;
-	justify-content: center;
+.projectName > a {
+	color: #fff;
+	font-family: 'Cinzel Decorative', cursive;
 }
 
-.bucket {
-	margin: 2em 2em;
+.projectName > a:hover {
+	text-decoration: none;
 }
 
-.secondsplash {
-	height: 700px;
-	background-image: url("../assets/tablehands.jpg");
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+.glyphicon-menu-down {
+	font-size: 2em;
 }
 
-.topnav {
-	margin: 0;
-	height: 5em;
-	width: 100%;
-	position: fixed;
-	background-color: #fff;
+.glyphicon-pencil, .glyphicon-dashboard, .glyphicon-calendar, .glyphicon-ban-circle {
+	font-size: 4em;
+}
+
+.content {
+	text-align: center;
+}
+
+.signup-button {
+	transition: background-color 0.5s ease;
+	background-color: #A34241;
+	font-size: 1em;
+	padding: 1em 1em;
+	color: #ffffff;
+}
+
+.signup-button:hover {
+	background-color: #CD730F;
+	color: #ffffff;
 }

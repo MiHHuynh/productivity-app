@@ -12,11 +12,32 @@
 <h3>{{ found_list.name }}</h3>
 <ol>
 {% for item in found_list.todo_items %}
-	<li>ID: {{ item.id }} || {{ item.description }} || Due: {{item.due_date}} || <a href="{{url_for('todoitems.edit', user_id=user.id, list_id=found_list.id, item_id=item.id)}}">Edit</a> || <a href="{{url_for('todoitems.show', user_id=user.id, list_id=found_list.id, item_id=item.id)}}">Show</a> || <a class="btn btn-danger">Work On This <i class="glyphicon glyphicon-dashboard"></i></a></li>
+	<li>ID: {{ item.id }} || {{ item.description }} || Due: {{item.due_date}} || <a href="{{url_for('todoitems.edit', user_id=user.id, list_id=found_list.id, item_id=item.id)}}">Edit</a> || <a href="{{url_for('todoitems.show', user_id=user.id, list_id=found_list.id, item_id=item.id)}}">Show</a> ||   <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Work On This <i class="glyphicon glyphicon-dashboard"></i></button></li>
 {% endfor %}
 </ol>
 
 <a href="{{ url_for('todoitems.new', user_id=user.id, list_id=found_list.id) }}">Add list items!</a>
 <br>
 <a href="{{ url_for('lists.index', user_id=user.id) }}">Go back to all lists</a>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+          <h4 class="modal-title">Pomodoro</h4>
+        </div>
+        <div class="modal-body">
+			<p class="modal-pomodoro">25:00</p>
+        </div>
+        <div class="modal-footer">
+          <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+        </div>
+      </div>
+      
+    </div>
+  </div>
 {% endblock %}

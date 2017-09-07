@@ -22,9 +22,6 @@ from project.lists.views import lists_blueprint
 from project.todoitems.views import todoitems_blueprint
 from project.users.views import users_blueprint
 
-# REMOVE AFTER MORE CODE IS WRITTEN. ADDED TO TRIGGER DB MIGRATIONS
-import project.models
-
 app.register_blueprint(blacklistedsites_blueprint, url_prefix='/blacklistedsites')
 app.register_blueprint(lists_blueprint, url_prefix='/users/<int:user_id>/lists')
 app.register_blueprint(todoitems_blueprint, url_prefix="/users/<int:user_id>/lists/<int:list_id>/todoitems")

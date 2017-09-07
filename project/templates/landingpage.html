@@ -3,29 +3,72 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Productivity</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Cinzel+Decorative" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/normalize.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/landingpage.css') }}">
+
 </head>
 <body id="lp-body">
 	<div class="topnav">
-		<nav>
-			<ul class="nav-links">
-				<li class="nav-item branding">Productivity<li>
-				<li class="nav-item">Login<li>
-				<li class="nav-item">Signup<li>
-			</ul>
-		</nav>
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	      <div class="container-fluid">
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <div class="projectName navbar-brand">
+	            <a href="#"><span class="glyphicon glyphicon-fire"></span> Productivity Helper</a>
+	          </div>
+	        </div> <!-- end navbar-header -->
+	        <div class="navbar-collapse collapse">
+	          <ul class="nav navbar-nav navbar-right">
+	            <li class="about"><a href="#about">About</a></li>
+	            <li class=""><a href="{{url_for('users.login')}}">Login</a></li>
+	            <li class=""><a href="{{url_for('users.signup')}}">Sign Up</a></li>
+	          </ul>          
+	        </div>
+	      </div>
+	    </nav>
 	</div>
-	<div class="mainsplash">
-		<div class="signup-button"></div>
-	</div>
-	<h3>Learn more</h3>
-	<div class="buckets">
-
-		<div class="bucket">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, omnis fuga necessitatibus aliquam laudantium repellendus dolor corrupti quisquam dicta modi reiciendis placeat quaerat expedita deserunt mollitia consectetur quibusdam. Explicabo, eveniet?</div>
-		<div class="bucket">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, omnis fuga necessitatibus aliquam laudantium repellendus dolor corrupti quisquam dicta modi reiciendis placeat quaerat expedita deserunt mollitia consectetur quibusdam. Explicabo, eveniet?</div>
-		<div class="bucket">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, omnis fuga necessitatibus aliquam laudantium repellendus dolor corrupti quisquam dicta modi reiciendis placeat quaerat expedita deserunt mollitia consectetur quibusdam. Explicabo, eveniet?</div>
-	</div>
-	<div class="secondsplash">
+	<div class="content">
+		<div class="mainsplash">
+			<h1 class="splash-headline">Technology has largely taken away our ability to focus.</h1>
+			<h2 class="splash-headline">Let's use more technology to take it back!</h2>
+			<button class="btn signup-button">Sign Up Now!</button>
+		</div>
+		<div class="buckets" id="about">
+			<div class="row">
+				<div class="col-md-12">
+					<h3>Learn more</h3>
+					<h1><span class="glyphicon glyphicon-menu-down"></span></h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3 bucket">
+					<span class="glyphicon glyphicon-pencil"></span><br>
+					<h4>Make organized to-do lists for each aspect of your life.</h4>
+				</div>
+				<div class="col-md-3 bucket">
+					<span class="glyphicon glyphicon-dashboard"></span><br>
+					<h4>Do pomodoros to tackle all your tasks.</h4>
+				</div>
+				<div class="col-md-3 bucket">
+					<span class="glyphicon glyphicon-calendar"></span><br>
+					<h4>See all of your upcoming due dates and never miss a deadline again.</h4>
+				</div>
+				<div class="col-md-3 bucket">
+					<span class="glyphicon glyphicon-ban-circle"></span><br>
+					<h4>Block access to distracting time-sink sites.</h4>
+				</div>
+			</div>
+			
+		</div>
+		<div class="secondsplash">
+		</div>
+		</div>
 </body>
 </html>
