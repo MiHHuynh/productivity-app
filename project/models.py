@@ -1,6 +1,7 @@
 from project import db, bcrypt
 from flask_login import UserMixin
-from datetime import datetime
+import time
+from datetime import datetime, date, timedelta
 
 blacklisted_site_user_join_table = db.Table('blacklisted_site_users',
 		db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
@@ -55,6 +56,11 @@ class ToDoItem(db.Model):
 			return True
 		else:
 			return False
+
+	def is_almost_due(self):
+		today = date.today()
+		margin = today + timedelta(days=14)
+		return today <= self.due_date.date() < margin
 
 class BlacklistedSite(db.Model):
 	__tablename__ = 'blacklisted_sites'

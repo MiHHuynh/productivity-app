@@ -5,7 +5,7 @@ from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
 from flask_wtf.csrf import CSRFProtect
 import os
-
+	
 app = Flask(__name__)
 login_manager = LoginManager()
 login_manager.init_app(app)

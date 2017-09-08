@@ -45,31 +45,21 @@
 		    {% for list in user.lists %}
 		    	{% for item in list.todo_items%}
 		    		{% if item.due_date != None %}
-		    			{% if item.is_overdue() %}
+		    			{% if item.is_overdue() or item.is_almost_due() %}
 					      <tr>
-					        <td><span class="glyphicon glyphicon-alert"></span> {{ item.due_date }}</td>
-					        <!-- time.strftime("%x", time.gmtime(variable name)) -->
+					        <td>
+			    			{% if item.is_overdue() %}
+					        	<span class="glyphicon glyphicon-alert"></span>
+					        {% endif %} {{ item.due_date.date() }}
+					        </td>
 					        <td>{{ item.description }}</td>
 					        <td>{{ list.name }}</td>
 					        <td><a href="{{url_for('todoitems.show', user_id=user.id, list_id=list.id, id=item.id)}}">View</a></td>
 					      </tr>
-						{% endif %}		    		
+		    			{% endif %}    		
 					{% endif %}		    		
 			    {% endfor %}
 		    {% endfor %}
-
-		      <tr>
-		        <td>9/8/2017</td>
-		        <td>Buy more cat litter</td>
-		        <td>Chores</td>
-		        <td>View</td>
-		      </tr>
-		      <tr>
-		        <td>9/9/2017</td>
-		        <td>Build Hack-Or-Snooze</td>
-		        <td>Stuff that should've been completed years ago</td>
-		        <td>View</td>
-		      </tr>
 		    </tbody>
 		  </table>
 	</div>
@@ -79,7 +69,7 @@
 	{% for list in user.lists %}
 	<div class="col-md-4">
 		<h4>{{ list.name }}</h4>
-		<p><a href="{{ url_for('lists.show', user_id=user.id, id=list.id) }}">View</a> / <a href="{{ url_for('lists.edit', user_id=user.id, id=list.id) }}">Edit</a></p>
+		<p><a href="{{ url_for('todoitems.new', user_id=user.id, list_id=list.id) }}">View</a> / <a href="{{ url_for('lists.edit', user_id=user.id, id=list.id) }}">Edit</a></p>
 		<ul>
 			{% for item in list.todo_items %}
 				<li>{{ item.description }}</li>

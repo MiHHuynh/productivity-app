@@ -45,12 +45,12 @@
 		</p>		
 	</div>
 
-	<button type="submit">Edit this item!</button>
+	<button type="submit" class="form-control">Edit this item!</button>
 </form>
-
+<br>
 <form action="{{ url_for('todoitems.show', user_id=user.id, list_id=found_list.id, id=todoitem.id) }}?_method=DELETE" method="POST">
 	{{ delete_form.csrf_token }}
-	<button type="submit">Delete this item!</button>
+	<button type="submit" class="form-control">Delete this item!</button>
 </form>
 
 {% endblock %}
