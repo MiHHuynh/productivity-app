@@ -51,7 +51,7 @@
 					        <!-- time.strftime("%x", time.gmtime(variable name)) -->
 					        <td>{{ item.description }}</td>
 					        <td>{{ list.name }}</td>
-					        <td>View</td>
+					        <td><a href="{{url_for('todoitems.show', user_id=user.id, list_id=list.id, id=item.id)}}">View</a></td>
 					      </tr>
 						{% endif %}		    		
 					{% endif %}		    		

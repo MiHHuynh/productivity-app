@@ -15,7 +15,7 @@
 				<h3>Menu Options</h3>
 			</div>
 			<ul class="list-unstyled components">
-				<li class="active sidebar-link"><a href="#">Home</a></li>
+				<li class="active sidebar-link"><a href="{{ url_for('lists.index', user_id=current_user.id)}}">Home</a></li>
 				<li class="sidebar-link"><a href="#">Lists</a></li>
 				<li class="sidebar-link"><a href="#">Blacklisted Sites</a></li>
 				<li class="sidebar-link"><a href="{{url_for('users.edit', id=current_user.id)}}">Account Settings</a></li>
